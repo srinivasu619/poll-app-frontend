@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
     <div class="navContainer">
-      <div class="logo">
+      <div class="logo" @click="navigateToHome">
         <img
           src="https://image.flaticon.com/icons/svg/565/565435.svg"
           alt
@@ -19,7 +19,12 @@
 
 <script>
 export default {
-  name: "nav-bar"
+  name: "nav-bar",
+  methods: {
+    navigateToHome() {
+      this.$router.push({ name: "home" });
+    }
+  }
 };
 </script>
 
@@ -44,6 +49,7 @@ export default {
   box-shadow: 9px 9px 13px rgb(163, 177, 198, 0.6),
     -9px -9px 11px rgba(255, 255, 255, 0.5);
   border-radius: 8px;
+  cursor: pointer;
 }
 .logo > .logoHeader {
   font-weight: bold;

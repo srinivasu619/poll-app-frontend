@@ -7,13 +7,18 @@ export default new Router({
   mode: "history",
   routes: [
     {
-      path: "/",
+      path: "/polls",
       name: "home",
       component: () => import("./views/Home.vue")
     },
     {
+      path: "/polls/:id",
+      name: "poll-view",
+      component: () => import("./views/PollView.vue")
+    },
+    {
       path: "*",
-      redirect: "/"
+      redirect: "/polls"
     }
   ]
 });

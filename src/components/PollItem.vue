@@ -1,5 +1,5 @@
 <template>
-  <li class="poll-item" @click="navigatePoll(poll.id)">
+  <li class="poll-item" @click="navigatePoll(poll._id)">
     <div class="category">{{ poll.category || "GENERAL" }}</div>
     <div class="pollTitle">{{ poll.topic }}</div>
     <div class="stats">
