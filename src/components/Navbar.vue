@@ -10,7 +10,7 @@
         />
         <div class="logoHeader">Polls</div>
       </div>
-      <div class="create">
+      <div class="create" @click="navigateToCreate">
         <i class="fas fa-plus"></i>
       </div>
     </div>
@@ -23,6 +23,9 @@ export default {
   methods: {
     navigateToHome() {
       this.$router.push({ name: "home" });
+    },
+    navigateToCreate() {
+      this.$router.push({ name: "create" });
     }
   }
 };
