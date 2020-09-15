@@ -7,6 +7,8 @@
         v-for="(pollOption, index) in poll.pollOptions"
         :key="index"
         :option="pollOption"
+        :class="{ active: selectedPoll === pollOption }"
+        @click.native="toggleOption(pollOption)"
       ></poll-option>
     </ul>
   </div>
@@ -23,7 +25,8 @@ export default {
   data() {
     return {
       poll: {},
-      pollId: ""
+      pollId: "",
+      selectedPoll: ""
     };
   },
   apollo: {
@@ -42,6 +45,11 @@ export default {
           id: this.$route.params.id
         }
       };
+    }
+  },
+  methods: {
+    toggleOption(option) {
+      this.selectedPoll = option;
     }
   }
 };
@@ -62,5 +70,9 @@ export default {
 }
 .poll-options {
   list-style: none;
+}
+.active {
+  background: black;
+  color: white;
 }
 </style>
