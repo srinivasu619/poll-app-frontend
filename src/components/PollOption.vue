@@ -1,5 +1,8 @@
 <template>
-  <li class="poll-option">{{ option }}</li>
+  <li class="poll-option">
+    <span>{{ option }}</span>
+    <span v-if="statMode">{{ stat || 0 }} Votes</span>
+  </li>
 </template>
 
 <script>
@@ -8,6 +11,12 @@ export default {
   props: {
     option: {
       type: String
+    },
+    statMode: {
+      type: Boolean
+    },
+    stat: {
+      type: Number
     }
   }
 };
@@ -22,5 +31,7 @@ export default {
   margin-top: 16px;
   font-weight: 700;
   border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
 }
 </style>

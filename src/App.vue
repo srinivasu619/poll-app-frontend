@@ -28,7 +28,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  background-color: #E0E5EC;
+  background-color: #e0e5ec;
 }
 .route-container {
   width: 50%;
