@@ -37,4 +37,16 @@ export default {
 .full-width {
   width: 100%;
 }
+
+@media only screen and (max-width: 768px) {
+  .route-container {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .route-container {
+    width: 90%;
+  }
+}
 </style>
