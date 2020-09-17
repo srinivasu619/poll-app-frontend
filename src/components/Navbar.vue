@@ -70,4 +70,16 @@ export default {
     -9px -9px 11px rgba(255, 255, 255, 0.5);
   font-weight: bold;
 }
+
+@media only screen and (max-width: 768px) {
+  .navContainer {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .navContainer {
+    width: 90%;
+  }
+}
 </style>

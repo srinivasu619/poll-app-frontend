@@ -3,12 +3,13 @@
     <div class="category">{{ poll.category || "GENERAL" }}</div>
     <div class="pollTitle">{{ poll.topic }}</div>
     <div class="stats">
-      <div class="fav">
+      <!-- <div class="fav">
         <i class="far fa-heart"></i>
       </div>
       <div class="interactions">
         <i class="fas fa-chart-bar"></i>
-      </div>
+      </div> -->
+      {{ votesCount }} Votes
     </div>
   </li>
 </template>
@@ -19,6 +20,15 @@ export default {
   props: {
     poll: {
       type: Object
+    }
+  },
+  computed: {
+    votesCount() {
+      if (this.poll && this.poll.votes) {
+        return this.poll.votes.length;
+      } else {
+        return 0;
+      }
     }
   },
   methods: {
@@ -47,12 +57,17 @@ export default {
   letter-spacing: 2px;
 }
 .poll-item > .stats {
-  height: 24px;
+  font-size: 14px;
   display: flex;
   justify-content: flex-end;
-}
-.poll-item > .stats > div {
-  margin-left: 16px;
+  width: fit-content;
+  margin-left: auto;
+  flex-direction: row-reverse;
+  padding: 4px 8px;
+  font-weight: bold;
+  color: white;
+  background: black;
+  border-radius: 5px;
 }
 .poll-item > .category {
   text-transform: uppercase;

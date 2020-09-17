@@ -25,6 +25,9 @@ export default {
         polls: listPolls {
           _id
           topic
+          votes {
+            pollOption
+          }
         }
       }
     `
@@ -33,9 +36,6 @@ export default {
 </script>
 
 <style>
-.poll-container {
-  margin: 0 auto;
-}
 .poll-list {
   list-style: none;
 }
