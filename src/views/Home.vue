@@ -19,6 +19,9 @@ export default {
       polls: []
     };
   },
+  created() {
+    this.getIP();
+  },
   apollo: {
     polls: gql`
       query {
@@ -31,6 +34,13 @@ export default {
         }
       }
     `
+  },
+  methods: {
+    async getIP() {
+      const resp = await fetch("https://api.ipify.org?format=json");
+      const JSONResp = await resp.json();
+      sessionStorage.setItem("ipAddress", JSONResp.ip);
+    }
   }
 };
 </script>

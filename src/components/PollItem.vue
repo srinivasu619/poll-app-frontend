@@ -33,7 +33,6 @@ export default {
   },
   methods: {
     navigatePoll(id) {
-      console.log("CLICKED");
       this.$router.push({ name: "poll-view", params: { id: id } });
     }
   }

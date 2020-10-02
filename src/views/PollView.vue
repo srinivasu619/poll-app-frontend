@@ -2,6 +2,9 @@
   <div v-if="poll">
     <div class="category">{{ poll.category || "GENERAL" }}</div>
     <div class="pollTitle">{{ poll.topic }}</div>
+    <div v-if="statMode" class="vote-info">
+      🛈&nbsp;You have already submitted your vote.
+    </div>
     <ul class="poll-options">
       <poll-option
         v-for="(pollOption, index) in poll.pollOptions"
@@ -56,6 +59,7 @@ export default {
               pollOptions
               votes {
                 pollOption
+                ipAddress
               }
             }
           }
@@ -64,8 +68,15 @@ export default {
           id: this.$route.params.id
         },
         update: data => {
-          console.log(data);
-          this.stats = this.calculateStats(data.poll.votes);
+          const votes = data.poll.votes || [];
+          const vote = votes.find(
+            vote => vote.ipAddress === sessionStorage.getItem("ipAddress")
+          );
+          console.log(votes, vote);
+          if (vote) {
+            this.selectedPoll = vote.pollOption;
+            this.setUserPreferences(votes);
+          }
           return data.poll;
         }
       };
@@ -76,6 +87,11 @@ export default {
       if (!this.statMode) {
         this.selectedPoll = option;
       }
+    },
+    setUserPreferences(votes) {
+      this.stats = this.calculateStats(votes);
+      this.$cookies.set(this.$route.params.id, this.selectedPoll);
+      this.statMode = true;
     },
     calculateStats(votes) {
       return votes
@@ -105,10 +121,7 @@ export default {
           pollOption: this.selectedPoll
         },
         update: (_, { data: { submitVote } }) => {
-          console.log(submitVote, typeof submitVote);
-          this.stats = this.calculateStats(submitVote.votes);
-          this.$cookies.set(this.$route.params.id, this.selectedPoll);
-          this.statMode = true;
+          this.setUserPreferences(submitVote.votes);
         }
       });
     }
@@ -122,7 +135,6 @@ export default {
   background: black;
   color: white;
   border-radius: 4px;
-  /* text-transform: uppercase; */
   letter-spacing: 2px;
   font-family: "Roboto Mono", Helvetica, Arial, sans-serif;
   cursor: pointer;
@@ -153,5 +165,14 @@ export default {
 .active {
   background: black;
   color: white;
+}
+
+.vote-info {
+  padding: 8px 12px;
+  background: black;
+  color: white;
+  border-radius: 4px;
+  margin: 12px 0;
+  font-size: 14px;
 }
 </style>
