@@ -37,8 +37,8 @@ export default {
     PollOption
   },
   created() {
-    this.statMode = this.$cookies.isKey(this.$route.params.id);
-    this.selectedPoll = this.$cookies.get(this.$route.params.id);
+    this.statMode = !!localStorage.getItem(this.$route.params.id);
+    this.selectedPoll = localStorage.getItem(this.$route.params.id);
   },
   data() {
     return {
@@ -90,7 +90,7 @@ export default {
     },
     setUserPreferences(votes) {
       this.stats = this.calculateStats(votes);
-      this.$cookies.set(this.$route.params.id, this.selectedPoll);
+      localStorage.setItem(this.$route.params.id, this.selectedPoll);
       this.statMode = true;
     },
     calculateStats(votes) {
